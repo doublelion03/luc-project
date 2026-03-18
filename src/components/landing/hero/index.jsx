@@ -100,9 +100,15 @@ const [formData, setFormData] = useState(initialFormData);
                   <SelectValue placeholder={<><User className="h-4 w-4 mr-2" /> Talent Name</>} />
                 </SelectTrigger>
                 <SelectContent className="mt-9">
-                 {
-                  
-                 }
+                  <SelectGroup>
+                    <SelectItem value="name">John Doe</SelectItem>
+                    <SelectItem value="name">John Doe</SelectItem>
+                    <SelectItem value="name">John Doe</SelectItem>
+                    <SelectItem value="name">John Doe</SelectItem>
+                    <SelectItem value="name">John Doe</SelectItem>
+                    <SelectItem value="name">John Doe</SelectItem>
+                    <SelectItem value="name">John Doe</SelectItem>
+                  </SelectGroup>
                 </SelectContent>
               </Select>
             </motion.div>
