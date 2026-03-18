@@ -1,8 +1,10 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { containerVariants, itemVariants, buttonVariants } from "@/lib/animations.js";
+import { useNavigate } from "react-router";
 
 export default function ProfessionalCTA() {
+  const navigate = useNavigate()
   return (
     <motion.section 
       className="bg-slate-950 text-slate-50"
@@ -38,7 +40,7 @@ export default function ProfessionalCTA() {
           transition={{ delay: 0.3 }}
         >
           <motion.div variants={buttonVariants}>
-            <Button className="bg-blue-800 text-white px-8 py-6 rounded-md cursor-pointer hover:opacity-80 min-w-[160px] text-lg font-semibold">
+            <Button onClick={()=>navigate('/client-sign-in')} className="bg-blue-800 text-white px-8 py-6 rounded-md cursor-pointer hover:opacity-80 min-w-[160px] text-lg font-semibold">
               Hire Talent
             </Button>
           </motion.div>
@@ -47,6 +49,7 @@ export default function ProfessionalCTA() {
             transition={{ delay: 0.1 }}
           >
             <Button 
+            onClick={()=>navigate('/talent-sign-in')}
               variant="secondary" 
               className="bg-gray-800 text-white border border-gray-600 px-8 py-6 rounded-md cursor-pointer hover:bg-blue-800 hover:text-white text-lg font-semibold"
             >

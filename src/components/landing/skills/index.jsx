@@ -81,7 +81,7 @@ export default function Skills() {
                 transition: { type: "spring", stiffness: 300 }
               }}
             >
-              <Card className="rounded-2xl bg-white shadow-sm p-0 overflow-hidden cursor-pointer h-full group">
+              <Card className=" bg-white shadow-sm p-0 overflow-hidden cursor-pointer h-full group">
                 <motion.div
                   className="w-full md:h-[270px] overflow-hidden"
                   variants={cardImageVariants}

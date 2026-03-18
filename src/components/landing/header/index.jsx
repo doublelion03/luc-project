@@ -20,7 +20,7 @@ function Header() {
         whileHover={{ scale: 1.05 }}
         variants={buttonVariants}
       >
-        <Link to={"/landing-page"} className="flex items-center gap-2">
+        <Link to={"/"} className="flex items-center gap-2">
           <motion.div 
             className="p-2 bg-blue-800 rounded-md text-white"
             whileHover={{ rotate: 360 }}
@@ -57,19 +57,20 @@ function Header() {
       <div className="ml-auto flex items-center gap-4">
         <motion.div variants={buttonVariants} onClick={()=>navigate('/selection')}>
           <Button className="bg-blue-800 text-white px-4 py-[18px] rounded-md cursor-pointer hover:opacity-80 hidden lg:flex">
-            <UserPlus className="h-4 w-4 mr-2"/>
-            Sign Up
+            {/* <UserPlus className="h-4 w-4 mr-2"/> */}
+            Sign In
+            <LogIn className="h-4 w-4 ml-2" />
           </Button>
         </motion.div>
-        <motion.div 
+        {/* <motion.div 
           variants={buttonVariants}
           transition={{ delay: 0.2 }}
         >
           <Button className="bg-white text-black border border-gray-300 px-4 py-[18px] rounded-md cursor-pointer hover:bg-blue-800 hover:text-white">
             Login
-            <LogIn className="h-4 w-4 ml-2" />
+            
           </Button>
-        </motion.div>
+        </motion.div> */}
       </div>
     </motion.header>
   );

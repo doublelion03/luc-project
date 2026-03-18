@@ -18,6 +18,13 @@ export default function Hero() {
   status: "",
 };
 const [formData, setFormData] = useState(initialFormData);
+ const universities = [
+    "Select University",
+    "University of Lagos",
+    "MIT",
+    "Stanford University",
+    "Other",
+  ];
   return (
     <motion.section 
       className="py-20 px-6 lg:px-12 bg-white"
@@ -56,12 +63,12 @@ const [formData, setFormData] = useState(initialFormData);
               animate={{ scale: 1 }}
               transition={{ delay: 0.8 }}
             >
-              <Search />
+              <Search className="h-5 w-5"/>
             </motion.div>
             <input 
               type="text" 
               placeholder="Search for talent..." 
-              className="h-12 flex-1 min-w-[180px] md:min-w-[220px] rounded-lg border border-slate-200 px-10 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+              className="h-12 flex-1 min-w-45 md:min-w-55 rounded-lg border border-slate-200 px-10 focus:outline-none focus:ring-2 focus:ring-blue-500" 
             />
             <motion.div variants={buttonVariants}>
               <Button className="h-12 px-6 bg-blue-800 text-white hover:bg-blue-700 cursor-pointer text-sm md:text-medium">Find Talent</Button>
@@ -78,18 +85,13 @@ const [formData, setFormData] = useState(initialFormData);
                 <SelectTrigger className="w-full max-w-48 bg-gray-100">
                   <SelectValue placeholder={<><School className="h-4 w-4 mr-2" /> Institution</>} />
                 </SelectTrigger>
-                <SelectContent className="mt-9">
-                  <SelectGroup>
-                    <SelectItem value="university-of-ilorin">University Of Ilorin</SelectItem>
-                    <SelectItem value="university-of-ilorin">University Of Ilorin</SelectItem>
-                    <SelectItem value="university-of-ilorin">University Of Ilorin</SelectItem>
-                    <SelectItem value="university-of-ilorin">University Of Ilorin</SelectItem>
-                    <SelectItem value="university-of-ilorin">University Of Ilorin</SelectItem>
-                    <SelectItem value="university-of-ilorin">University Of Ilorin</SelectItem>
-                    <SelectItem value="university-of-ilorin">University Of Ilorin</SelectItem>
-                    <SelectItem value="university-of-ilorin">University Of Ilorin</SelectItem>
-                  </SelectGroup>
-                </SelectContent>
+                 <SelectContent className='mt-9'>
+                {universities.map((item) => (
+                  <SelectItem key={item} value={item}>
+                    {item}
+                  </SelectItem>
+                ))}
+              </SelectContent>
               </Select>
             </motion.div>
             <motion.div variants={itemVariants}>
@@ -98,15 +100,9 @@ const [formData, setFormData] = useState(initialFormData);
                   <SelectValue placeholder={<><User className="h-4 w-4 mr-2" /> Talent Name</>} />
                 </SelectTrigger>
                 <SelectContent className="mt-9">
-                  <SelectGroup>
-                    <SelectItem value="name">John Doe</SelectItem>
-                    <SelectItem value="name">John Doe</SelectItem>
-                    <SelectItem value="name">John Doe</SelectItem>
-                    <SelectItem value="name">John Doe</SelectItem>
-                    <SelectItem value="name">John Doe</SelectItem>
-                    <SelectItem value="name">John Doe</SelectItem>
-                    <SelectItem value="name">John Doe</SelectItem>
-                  </SelectGroup>
+                 {
+                  
+                 }
                 </SelectContent>
               </Select>
             </motion.div>
