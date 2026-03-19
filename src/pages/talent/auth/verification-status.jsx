@@ -144,7 +144,7 @@ function VerifiationStatus() {
               </p>
               <p className="text-sm text-slate-500">
                 If you have questions about your credentials, contact the
-                University Verification Officer.
+                University Verification Officers.
               </p>
             </div>
           </div>
