@@ -11,6 +11,7 @@ import ClientLoginPage from "./pages/client/auth/login"
 import UniversityRegsiterPage from "./pages/university/auth/resgiter"
 import SuperAdminRegsiterPage from "./pages/super-admin/auth/resgiter"
 import ClientRegsiterPage from "./pages/client/auth/resgiter"
+import VerifiationStatus from "./pages/talent/auth/verification-status"
 
 
 
@@ -31,6 +32,7 @@ function App() {
       <Route path="/talent-sign-up" element={<TalentRegisterOnePage/>}/>
       <Route path="/talent-sign-up/step-two" element={<TalentRegsiterTwoPage/>}/>
       <Route path="/talent-sign-up/step-three" element={<TalentRegsiterThreePage/>}/>
+      <Route path="/talent-sign-up/verification" element={<VerifiationStatus/>}/>
 
       {/* University Route */}
       <Route path="/university-sign-in" element={<UniversityLoginPage/>} />

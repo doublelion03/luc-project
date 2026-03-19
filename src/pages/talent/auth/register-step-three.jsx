@@ -9,8 +9,8 @@ function TalentRegisterThreePage() {
   const [email, setEmail] = useState("");
   const [matriculation, setMatriculation] = useState("");
 
-  const isValidEmail = (value) => /^[^\s@]+@[^\s@]+\.(edu|university)$/i.test(value);
-  const canSubmit = isValidEmail(email) && matriculation.trim().length > 3;
+//   const isValidEmail = (value) => /^[^\s@]+@[^\s@]+\.(edu|university)$/i.test(value);
+//   const canSubmit = isValidEmail(email) && matriculation.trim().length > 3;
 
   return (
     <div className="min-h-screen bg-slate-50 px-4 py-10">
@@ -119,8 +119,8 @@ function TalentRegisterThreePage() {
 
               <Button
                 className="flex items-center justify-center gap-2 bg-blue-700 px-6 py-3"
-                disabled={!canSubmit}
-                onClick={() => navigate("/talent-sign-up/complete")}
+                // disabled={!canSubmit}
+                onClick={() => navigate("/talent-sign-up/verification")}
               >
                 Complete Registration
                 <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-white text-blue-700">

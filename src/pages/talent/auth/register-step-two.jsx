@@ -11,14 +11,17 @@ function TalentRegisterTwoPage() {
   const [photoName, setPhotoName] = useState("");
   const [coreNiches, setCoreNiches] = useState(["IT"]);
   const [refined, setRefined] = useState([
-    { category: "IT SPECIALTIES", items: ["Cybersecurity", "Cloud Architecture"] },
+    {
+      category: "IT SPECIALTIES",
+      items: ["Cybersecurity", "Cloud Architecture"],
+    },
     { category: "ENGINEERING SPECIALTIES", items: ["Mechanical Design"] },
   ]);
   const [bio, setBio] = useState("");
 
   const allCoreNiches = useMemo(
     () => ["IT", "Engineering", "Fashion", "+ Other"],
-    []
+    [],
   );
 
   const canContinue = coreNiches.length > 0;
@@ -27,7 +30,7 @@ function TalentRegisterTwoPage() {
     setCoreNiches((prev) =>
       prev.includes(niche)
         ? prev.filter((item) => item !== niche)
-        : [...prev, niche]
+        : [...prev, niche],
     );
   };
 
@@ -39,8 +42,8 @@ function TalentRegisterTwoPage() {
           : {
               ...group,
               items: group.items.filter((i) => i !== item),
-            }
-      )
+            },
+      ),
     );
   };
 
@@ -167,7 +170,10 @@ function TalentRegisterTwoPage() {
 
             <div className="mt-4 space-y-4">
               {refined.map((group) => (
-                <div key={group.category} className="rounded-lg bg-slate-50 p-4">
+                <div
+                  key={group.category}
+                  className="rounded-lg bg-slate-50 p-4"
+                >
                   <p className="text-xs font-semibold text-slate-500">
                     {group.category}
                   </p>
@@ -203,7 +209,8 @@ function TalentRegisterTwoPage() {
           <div className="px-6 py-6">
             <p className="font-semibold">Personal Professional Bio</p>
             <p className="text-sm text-slate-500 mt-1">
-              Highlight your key achievements and what kind of projects you are looking for.
+              Highlight your key achievements and what kind of projects you are
+              looking for.
             </p>
 
             <Textarea

@@ -5,11 +5,14 @@ import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
 import { GraduationCap, User, X } from "lucide-react";
+import { useDispatch } from "react-redux";
+import { saveStepOne } from "@/store/registerSlice";
 
 function TalentRegisterOnePage() {
   const navigate = useNavigate();
@@ -31,6 +34,8 @@ function TalentRegisterOnePage() {
     major.trim().length > 0 &&
     university &&
     university !== "Select University";
+
+    const dispatch = useDispatch();
 
   return (
     <div className="min-h-screen bg-slate-50">
@@ -92,13 +97,15 @@ function TalentRegisterOnePage() {
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Select University" />
               </SelectTrigger>
-              <SelectContent>
-                {universities.map((item) => (
-                  <SelectItem key={item} value={item}>
-                    {item}
-                  </SelectItem>
-                ))}
-              </SelectContent>
+              <SelectGroup>
+                <SelectContent className="mt-9">
+                  {universities.map((item) => (
+                    <SelectItem key={item} value={item}>
+                      {item}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </SelectGroup>
             </Select>
           </div>
 
@@ -141,14 +148,22 @@ function TalentRegisterOnePage() {
           </div>
 
           <div className="flex justify-between mt-8">
-            <Link
-              to="/"
-              className="text-slate-500 hover:text-slate-700">
+            <Link to="/" className="text-slate-500 hover:text-slate-700">
               Cancel
             </Link>
 
             <Button
-              onClick={() => navigate("/talent-sign-up/step-two")}
+              onClick={() => {
+    dispatch(
+      saveStepOne({
+        full_name: fullName,
+        institution_id: university, // ⚠️ must be ID later
+        major,
+        level,
+      })
+    );
+    navigate("/talent-sign-up/step-two");
+  }}
               disabled={!canContinue}
               className="bg-blue-700"
             >
@@ -181,7 +196,8 @@ function TalentRegisterOnePage() {
           <div className="bg-blue-50 border border-blue-200 p-4 rounded-lg text-sm">
             <p className="font-semibold text-blue-700">Privacy First</p>
             <p className="text-slate-600 mt-1">
-              Your academic data is only used for verification and match quality.
+              Your academic data is only used for verification and match
+              quality.
             </p>
           </div>
         </div>

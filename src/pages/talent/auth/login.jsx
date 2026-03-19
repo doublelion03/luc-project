@@ -10,14 +10,38 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import studentPortal from "@/assets/college campus-rafiki.png" 
+import { useState } from "react";
 
 
 
 function TalentLoginPage() {
+       
+      
+      const [formData, setFormData] = useState({
+        email : '',
+        password : ''
+      })
 
-  function onSubmit(){
+      function handleOnChange(event){
+        console.log(event.target.name);
+        const {name, value} = event.target
+ setFormData({
+          ...formData,
+          [name] : value
+        })
+        
+      }
+
+  function handleSubmit(event){
+    event.preventDefault()
+
+    // call api here and pass the name value, email value
+
+    console.log(formData);
+    setFormData(formData)
     
   }
+  console.log(formData);
     return ( 
         <div className="min-h-screen bg-slate-50">
              <motion.header
@@ -99,7 +123,7 @@ function TalentLoginPage() {
         opportunities.
       </p>
 
-      <form className="mt-8 space-y-5" onSubmit={onSubmit}>
+      <form className="mt-8 space-y-5" onSubmit={handleSubmit}>
 
         {/* Email */}
         <div>
@@ -108,6 +132,10 @@ function TalentLoginPage() {
           </Label>
           <Input
             type="email"
+            name="email"
+            id="email"
+            value={formData.email}
+            onChange={handleOnChange}
             placeholder="name@university.edu"
             required
             className="mt-2 w-full rounded-md border border-slate-200 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
@@ -131,7 +159,11 @@ function TalentLoginPage() {
 
           <Input
             type="password"
+            name="password"
+            id="password"
             placeholder="••••••••"
+            value={formData.password}
+            onChange={handleOnChange}
             required
             className="mt-2 w-full rounded-md border border-slate-200 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
           />
@@ -144,7 +176,7 @@ function TalentLoginPage() {
         </div>
 
         {/* Button */}
-        <Button onClick={()=>onSubmit} className="w-full bg-blue-700 hover:bg-blue-800 py-5 text-white text-sm cursor-pointer">
+        <Button type="submit" className="w-full bg-blue-700 hover:bg-blue-800 py-5 text-white text-sm cursor-pointer">
           Sign In to Dashboard →
         </Button>
       </form>
