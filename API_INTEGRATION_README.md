@@ -2,7 +2,7 @@
 
 This document outlines the API integration for the LUC platform with the backend API at `https://luc-m8t9.onrender.com`.
 
-## 📁 API Structure
+##  API Structure
 
 ### Core Files
 - `src/lib/api/config.js` - API configuration and endpoint definitions
@@ -22,7 +22,7 @@ This document outlines the API integration for the LUC platform with the backend
 - `src/hooks/useApi.js` - Generic API hooks (useApi, useMutation, usePagination, etc.)
 - `src/hooks/index.js` - Hook exports
 
-## 🚀 Usage Examples
+##  Usage Examples
 
 ### Authentication
 ```jsx
@@ -69,7 +69,7 @@ const userData = await apiClient.get('/users/profile')
 await authService.login({ email, password }, 'talent')
 ```
 
-## 🔧 Configuration
+##  Configuration
 
 ### Base URL
 The API base URL is configured in `src/lib/api/config.js`:
@@ -85,7 +85,7 @@ export const API_CONFIG = {
 - Automatic token refresh on 401 errors
 - Token management handled by the API client
 
-## 📋 Available Endpoints
+##  Available Endpoints
 
 ### Authentication
 - `POST /auth/login` - User login
@@ -125,7 +125,7 @@ export const API_CONFIG = {
 - `GET /admin/system` - System statistics
 - `GET /admin/reports` - Get reports
 
-## 🔄 Token Management
+##  Token Management
 
 The API client automatically handles:
 - Adding Authorization headers to requests
@@ -133,7 +133,7 @@ The API client automatically handles:
 - Clearing tokens on logout
 - Redirecting to login on session expiry
 
-## 🛠 Error Handling
+##  Error Handling
 
 All API calls include built-in error handling:
 - Network errors are caught and logged
@@ -141,7 +141,7 @@ All API calls include built-in error handling:
 - Loading states are managed by hooks
 - Error states are available for UI feedback
 
-## 📝 File Uploads
+##  File Uploads
 
 For file uploads, use the dedicated upload method:
 ```jsx
@@ -154,7 +154,7 @@ const uploadPortfolioMedia = async (file, onProgress) => {
 }
 ```
 
-## 🔒 Security Features
+##  Security Features
 
 - JWT token authentication
 - Automatic token refresh
@@ -162,7 +162,7 @@ const uploadPortfolioMedia = async (file, onProgress) => {
 - Request/response interceptors
 - CORS support
 
-## 📊 Pagination
+##  Pagination
 
 Use the `usePagination` hook for paginated data:
 ```jsx
@@ -176,7 +176,7 @@ const {
 } = usePagination(talentService.getJobs, { limit: 10 })
 ```
 
-## 🎯 Next Steps
+##  Next Steps
 
 1. **Update API Endpoints**: Verify and update the actual API endpoints in `config.js` based on the Swagger documentation
 2. **Add Error Boundaries**: Implement error boundaries for better error handling
@@ -184,7 +184,7 @@ const {
 4. **Add Caching**: Implement response caching for better performance
 5. **Add Testing**: Write unit tests for API services and hooks
 
-## 📞 Support
+##  Support
 
 For API-related issues:
 1. Check the browser console for error messages
