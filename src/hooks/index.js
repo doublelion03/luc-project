@@ -1,5 +1,5 @@
 // Export all hooks
-export { useAuth, AuthProvider } from './useAuth.js'
+export { useAuth, AuthProvider } from './useAuth.jsx'
 export {
   useApi,
   useLazyApi,

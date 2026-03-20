@@ -135,10 +135,21 @@ export class AuthService {
     }
   }
 
+  // Resend verification email
+  async resendVerification(email) {
+    try {
+      const response = await apiClient.post(API_CONFIG.ENDPOINTS.AUTH.RESEND_VERIFICATION, { email })
+      return response
+    } catch (error) {
+      console.error('Resend verification error:', error)
+      throw error
+    }
+  }
+
   // Change password
   async changePassword(currentPassword, newPassword) {
     try {
-      const response = await apiClient.post('/auth/change-password', {
+      const response = await apiClient.post(API_CONFIG.ENDPOINTS.AUTH.CHANGE_PASSWORD, {
         currentPassword,
         newPassword
       })
@@ -163,6 +174,127 @@ export class AuthService {
     } catch (error) {
       console.error('Account deletion error:', error)
       throw error
+    }
+  }
+
+  // Update user settings
+  async updateSettings(settings) {
+    try {
+      const response = await apiClient.put(API_CONFIG.ENDPOINTS.USERS.SETTINGS, settings)
+      return response
+    } catch (error) {
+      console.error('Update settings error:', error)
+      throw error
+    }
+  }
+
+  // Get user settings
+  async getSettings() {
+    try {
+      const response = await apiClient.get(API_CONFIG.ENDPOINTS.USERS.SETTINGS)
+      return response
+    } catch (error) {
+      console.error('Get settings error:', error)
+      throw error
+    }
+  }
+
+  // Get user notifications
+  async getUserNotifications() {
+    try {
+      const response = await apiClient.get(API_CONFIG.ENDPOINTS.USERS.NOTIFICATIONS)
+      return response
+    } catch (error) {
+      console.error('Get user notifications error:', error)
+      throw error
+    }
+  }
+
+  // Mark notification as read
+  async markUserNotificationRead(notificationId) {
+    try {
+      const response = await apiClient.put(`${API_CONFIG.ENDPOINTS.USERS.NOTIFICATIONS}/${notificationId}/read`)
+      return response
+    } catch (error) {
+      console.error('Mark notification read error:', error)
+      throw error
+    }
+  }
+
+  // Get user activity
+  async getUserActivity() {
+    try {
+      const response = await apiClient.get(API_CONFIG.ENDPOINTS.USERS.ACTIVITY)
+      return response
+    } catch (error) {
+      console.error('Get user activity error:', error)
+      throw error
+    }
+  }
+
+  // Search users
+  async searchUsers(query) {
+    try {
+      const response = await apiClient.get(API_CONFIG.ENDPOINTS.USERS.SEARCH, { query })
+      return response
+    } catch (error) {
+      console.error('Search users error:', error)
+      throw error
+    }
+  }
+
+  // Enable two-factor authentication
+  async enableTwoFactor() {
+    try {
+      const response = await apiClient.post('/auth/2fa/enable')
+      return response
+    } catch (error) {
+      console.error('Enable 2FA error:', error)
+      throw error
+    }
+  }
+
+  // Verify two-factor authentication
+  async verifyTwoFactor(code) {
+    try {
+      const response = await apiClient.post('/auth/2fa/verify', { code })
+      return response
+    } catch (error) {
+      console.error('Verify 2FA error:', error)
+      throw error
+    }
+  }
+
+  // Disable two-factor authentication
+  async disableTwoFactor(code) {
+    try {
+      const response = await apiClient.post('/auth/2fa/disable', { code })
+      return response
+    } catch (error) {
+      console.error('Disable 2FA error:', error)
+      throw error
+    }
+  }
+
+  // Refresh user session
+  async refreshSession() {
+    try {
+      const success = await apiClient.refreshToken()
+      return success
+    } catch (error) {
+      console.error('Session refresh error:', error)
+      throw error
+    }
+  }
+
+  // Check if session is valid
+  async isSessionValid() {
+    try {
+      const response = await apiClient.get('/auth/validate')
+      return response.valid
+    } catch (error) {
+      console.error('Session validation error:', error)
+      return false
     }
   }
 }

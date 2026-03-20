@@ -137,7 +137,7 @@ export class AdminService {
   // Get all jobs
   async getJobs(filters = {}) {
     try {
-      const response = await apiClient.get('/admin/jobs', filters)
+      const response = await apiClient.get(API_CONFIG.ENDPOINTS.ADMIN.JOBS, filters)
       return response
     } catch (error) {
       console.error('Get jobs error:', error)
@@ -170,7 +170,7 @@ export class AdminService {
   // Get all applications
   async getApplications(filters = {}) {
     try {
-      const response = await apiClient.get('/admin/applications', filters)
+      const response = await apiClient.get(API_CONFIG.ENDPOINTS.ADMIN.APPLICATIONS, filters)
       return response
     } catch (error) {
       console.error('Get applications error:', error)
@@ -181,7 +181,7 @@ export class AdminService {
   // Get financial data
   async getFinancialData(period = 'monthly') {
     try {
-      const response = await apiClient.get('/admin/financial', { period })
+      const response = await apiClient.get(API_CONFIG.ENDPOINTS.ADMIN.FINANCIAL, { period })
       return response
     } catch (error) {
       console.error('Get financial data error:', error)
@@ -192,7 +192,7 @@ export class AdminService {
   // Get analytics
   async getAnalytics() {
     try {
-      const response = await apiClient.get('/admin/analytics')
+      const response = await apiClient.get(API_CONFIG.ENDPOINTS.ADMIN.ANALYTICS)
       return response
     } catch (error) {
       console.error('Get analytics error:', error)
@@ -203,7 +203,7 @@ export class AdminService {
   // Send system notification
   async sendNotification(notificationData) {
     try {
-      const response = await apiClient.post('/admin/notifications', notificationData)
+      const response = await apiClient.post(API_CONFIG.ENDPOINTS.ADMIN.NOTIFICATIONS, notificationData)
       return response
     } catch (error) {
       console.error('Send notification error:', error)
@@ -214,7 +214,7 @@ export class AdminService {
   // Get system settings
   async getSystemSettings() {
     try {
-      const response = await apiClient.get('/admin/settings')
+      const response = await apiClient.get(API_CONFIG.ENDPOINTS.ADMIN.SETTINGS)
       return response
     } catch (error) {
       console.error('Get system settings error:', error)
@@ -225,7 +225,7 @@ export class AdminService {
   // Update system settings
   async updateSystemSettings(settings) {
     try {
-      const response = await apiClient.put('/admin/settings', settings)
+      const response = await apiClient.put(API_CONFIG.ENDPOINTS.ADMIN.SETTINGS, settings)
       return response
     } catch (error) {
       console.error('Update system settings error:', error)
@@ -236,7 +236,7 @@ export class AdminService {
   // Export data
   async exportData(dataType, format = 'csv') {
     try {
-      const response = await apiClient.get('/admin/export', { dataType, format })
+      const response = await apiClient.get(API_CONFIG.ENDPOINTS.ADMIN.EXPORT, { dataType, format })
       return response
     } catch (error) {
       console.error('Export data error:', error)
@@ -247,7 +247,7 @@ export class AdminService {
   // Get audit logs
   async getAuditLogs(filters = {}) {
     try {
-      const response = await apiClient.get('/admin/audit', filters)
+      const response = await apiClient.get(API_CONFIG.ENDPOINTS.ADMIN.AUDIT, filters)
       return response
     } catch (error) {
       console.error('Get audit logs error:', error)
@@ -258,7 +258,7 @@ export class AdminService {
   // Backup system
   async backupSystem() {
     try {
-      const response = await apiClient.post('/admin/system/backup')
+      const response = await apiClient.post(API_CONFIG.ENDPOINTS.ADMIN.BACKUPS)
       return response
     } catch (error) {
       console.error('Backup system error:', error)
@@ -269,7 +269,7 @@ export class AdminService {
   // Get backup history
   async getBackupHistory() {
     try {
-      const response = await apiClient.get('/admin/system/backups')
+      const response = await apiClient.get(API_CONFIG.ENDPOINTS.ADMIN.BACKUPS)
       return response
     } catch (error) {
       console.error('Get backup history error:', error)
@@ -280,10 +280,142 @@ export class AdminService {
   // Restore backup
   async restoreBackup(backupId) {
     try {
-      const response = await apiClient.post(`/admin/system/backups/${backupId}/restore`)
+      const response = await apiClient.post(`${API_CONFIG.ENDPOINTS.ADMIN.BACKUPS}/${backupId}/restore`)
       return response
     } catch (error) {
       console.error('Restore backup error:', error)
+      throw error
+    }
+  }
+
+  // Get user activity
+  async getUserActivity(userId) {
+    try {
+      const response = await apiClient.get(`${API_CONFIG.ENDPOINTS.ADMIN.USERS}/${userId}/activity`)
+      return response
+    } catch (error) {
+      console.error('Get user activity error:', error)
+      throw error
+    }
+  }
+
+  // Bulk user operations
+  async bulkUserOperation(operation, userIds) {
+    try {
+      const response = await apiClient.post(`${API_CONFIG.ENDPOINTS.ADMIN.USERS}/bulk`, { operation, userIds })
+      return response
+    } catch (error) {
+      console.error('Bulk user operation error:', error)
+      throw error
+    }
+  }
+
+  // Get system health
+  async getSystemHealth() {
+    try {
+      const response = await apiClient.get('/admin/system/health')
+      return response
+    } catch (error) {
+      console.error('Get system health error:', error)
+      throw error
+    }
+  }
+
+  // Get performance metrics
+  async getPerformanceMetrics() {
+    try {
+      const response = await apiClient.get('/admin/system/performance')
+      return response
+    } catch (error) {
+      console.error('Get performance metrics error:', error)
+      throw error
+    }
+  }
+
+  // Manage user roles
+  async updateUserRole(userId, role) {
+    try {
+      const response = await apiClient.put(`${API_CONFIG.ENDPOINTS.ADMIN.USERS}/${userId}/role`, { role })
+      return response
+    } catch (error) {
+      console.error('Update user role error:', error)
+      throw error
+    }
+  }
+
+  // Get content reports
+  async getContentReports() {
+    try {
+      const response = await apiClient.get('/admin/content-reports')
+      return response
+    } catch (error) {
+      console.error('Get content reports error:', error)
+      throw error
+    }
+  }
+
+  // Moderate content
+  async moderateContent(contentId, action) {
+    try {
+      const response = await apiClient.post(`/admin/content/${contentId}/moderate`, { action })
+      return response
+    } catch (error) {
+      console.error('Moderate content error:', error)
+      throw error
+    }
+  }
+
+  // Get subscription data
+  async getSubscriptionData() {
+    try {
+      const response = await apiClient.get('/admin/subscriptions')
+      return response
+    } catch (error) {
+      console.error('Get subscription data error:', error)
+      throw error
+    }
+  }
+
+  // Manage subscriptions
+  async manageSubscription(userId, subscriptionData) {
+    try {
+      const response = await apiClient.put(`/admin/subscriptions/${userId}`, subscriptionData)
+      return response
+    } catch (error) {
+      console.error('Manage subscription error:', error)
+      throw error
+    }
+  }
+
+  // Get API usage statistics
+  async getApiUsageStats() {
+    try {
+      const response = await apiClient.get('/admin/api-usage')
+      return response
+    } catch (error) {
+      console.error('Get API usage stats error:', error)
+      throw error
+    }
+  }
+
+  // Get security events
+  async getSecurityEvents() {
+    try {
+      const response = await apiClient.get('/admin/security-events')
+      return response
+    } catch (error) {
+      console.error('Get security events error:', error)
+      throw error
+    }
+  }
+
+  // Generate system report
+  async generateSystemReport(reportType, filters = {}) {
+    try {
+      const response = await apiClient.post('/admin/reports/generate', { reportType, filters })
+      return response
+    } catch (error) {
+      console.error('Generate system report error:', error)
       throw error
     }
   }
