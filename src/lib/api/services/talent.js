@@ -170,10 +170,98 @@ export class TalentService {
     }
   }
 
+  // Get reviews
+  async getReviews() {
+    try {
+      const response = await apiClient.get(API_CONFIG.ENDPOINTS.TALENT.REVIEWS)
+      return response
+    } catch (error) {
+      console.error('Get reviews error:', error)
+      throw error
+    }
+  }
+
+  // Add review
+  async addReview(reviewData) {
+    try {
+      const response = await apiClient.post(API_CONFIG.ENDPOINTS.TALENT.REVIEWS, reviewData)
+      return response
+    } catch (error) {
+      console.error('Add review error:', error)
+      throw error
+    }
+  }
+
+  // Get messages
+  async getMessages() {
+    try {
+      const response = await apiClient.get(API_CONFIG.ENDPOINTS.TALENT.MESSAGES)
+      return response
+    } catch (error) {
+      console.error('Get messages error:', error)
+      throw error
+    }
+  }
+
+  // Send message
+  async sendMessage(messageData) {
+    try {
+      const response = await apiClient.post(API_CONFIG.ENDPOINTS.TALENT.MESSAGES, messageData)
+      return response
+    } catch (error) {
+      console.error('Send message error:', error)
+      throw error
+    }
+  }
+
+  // Get notifications
+  async getNotifications() {
+    try {
+      const response = await apiClient.get(API_CONFIG.ENDPOINTS.TALENT.NOTIFICATIONS)
+      return response
+    } catch (error) {
+      console.error('Get notifications error:', error)
+      throw error
+    }
+  }
+
+  // Mark notification as read
+  async markNotificationRead(notificationId) {
+    try {
+      const response = await apiClient.put(`${API_CONFIG.ENDPOINTS.TALENT.NOTIFICATIONS}/${notificationId}/read`)
+      return response
+    } catch (error) {
+      console.error('Mark notification read error:', error)
+      throw error
+    }
+  }
+
+  // Get recommendations
+  async getRecommendations() {
+    try {
+      const response = await apiClient.get(API_CONFIG.ENDPOINTS.TALENT.RECOMMENDATIONS)
+      return response
+    } catch (error) {
+      console.error('Get recommendations error:', error)
+      throw error
+    }
+  }
+
+  // Get analytics data
+  async getAnalytics() {
+    try {
+      const response = await apiClient.get(API_CONFIG.ENDPOINTS.TALENT.ANALYTICS)
+      return response
+    } catch (error) {
+      console.error('Get analytics error:', error)
+      throw error
+    }
+  }
+
   // Update availability status
   async updateAvailability(availability) {
     try {
-      const response = await apiClient.put('/talent/availability', { availability })
+      const response = await apiClient.put(API_CONFIG.ENDPOINTS.TALENT.AVAILABILITY, { availability })
       return response
     } catch (error) {
       console.error('Update availability error:', error)
@@ -184,7 +272,7 @@ export class TalentService {
   // Get profile views
   async getProfileViews() {
     try {
-      const response = await apiClient.get('/talent/analytics/profile-views')
+      const response = await apiClient.get(`${API_CONFIG.ENDPOINTS.TALENT.ANALYTICS}/profile-views`)
       return response
     } catch (error) {
       console.error('Get profile views error:', error)
@@ -195,10 +283,65 @@ export class TalentService {
   // Get earnings data
   async getEarnings() {
     try {
-      const response = await apiClient.get('/talent/earnings')
+      const response = await apiClient.get(API_CONFIG.ENDPOINTS.TALENT.EARNINGS)
       return response
     } catch (error) {
       console.error('Get earnings error:', error)
+      throw error
+    }
+  }
+
+  // Withdraw earnings
+  async withdrawEarnings(amount) {
+    try {
+      const response = await apiClient.post(`${API_CONFIG.ENDPOINTS.TALENT.EARNINGS}/withdraw`, { amount })
+      return response
+    } catch (error) {
+      console.error('Withdraw earnings error:', error)
+      throw error
+    }
+  }
+
+  // Get earnings history
+  async getEarningsHistory() {
+    try {
+      const response = await apiClient.get(`${API_CONFIG.ENDPOINTS.TALENT.EARNINGS}/history`)
+      return response
+    } catch (error) {
+      console.error('Get earnings history error:', error)
+      throw error
+    }
+  }
+
+  // Update profile visibility
+  async updateProfileVisibility(visibility) {
+    try {
+      const response = await apiClient.put('/talent/profile/visibility', { visibility })
+      return response
+    } catch (error) {
+      console.error('Update profile visibility error:', error)
+      throw error
+    }
+  }
+
+  // Get skill recommendations
+  async getSkillRecommendations() {
+    try {
+      const response = await apiClient.get('/talent/skills/recommendations')
+      return response
+    } catch (error) {
+      console.error('Get skill recommendations error:', error)
+      throw error
+    }
+  }
+
+  // Verify skill
+  async verifySkill(skillId) {
+    try {
+      const response = await apiClient.post(`/talent/skills/${skillId}/verify`)
+      return response
+    } catch (error) {
+      console.error('Verify skill error:', error)
       throw error
     }
   }

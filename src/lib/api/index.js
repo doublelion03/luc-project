@@ -8,5 +8,6 @@ export {
   talentService, 
   universityService, 
   clientService, 
-  adminService 
+  adminService,
+  generalService
 } from './services/index.js'
