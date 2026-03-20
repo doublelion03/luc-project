@@ -9,15 +9,48 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
+import { useState } from "react";
+import { useAuth } from "@/hooks";
 import studentPortal from "@/assets/college campus-rafiki.png" 
 
 
 
 function TalentLoginPage() {
+  const navigate = useNavigate();
+  const { login, loading } = useAuth();
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+    remember: false
+  });
+  const [error, setError] = useState('');
 
-  function onSubmit(){
-    
-  }
+  const handleInputChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value
+    }));
+  };
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+
+    try {
+      await login(
+        { 
+          email: formData.email, 
+          password: formData.password 
+        }, 
+        'talent'
+      );
+      navigate('/talent-dashboard');
+    } catch (err) {
+      setError(err.message || 'Login failed. Please try again.');
+    }
+  };
+
     return ( 
         <div className="min-h-screen bg-slate-50">
              <motion.header
@@ -100,6 +133,11 @@ function TalentLoginPage() {
       </p>
 
       <form className="mt-8 space-y-5" onSubmit={onSubmit}>
+        {error && (
+          <div className="bg-red-50 border border-red-200 rounded-md p-3">
+            <p className="text-sm text-red-600">{error}</p>
+          </div>
+        )}
 
         {/* Email */}
         <div>
@@ -108,6 +146,9 @@ function TalentLoginPage() {
           </Label>
           <Input
             type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleInputChange}
             placeholder="name@university.edu"
             required
             className="mt-2 w-full rounded-md border border-slate-200 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
@@ -131,6 +172,9 @@ function TalentLoginPage() {
 
           <Input
             type="password"
+            name="password"
+            value={formData.password}
+            onChange={handleInputChange}
             placeholder="••••••••"
             required
             className="mt-2 w-full rounded-md border border-slate-200 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
@@ -139,13 +183,23 @@ function TalentLoginPage() {
 
         {/* Remember */}
         <div className="flex items-center gap-2 text-sm text-slate-600">
-          <Checkbox id="remember"  className="h-4 w-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500" /> 
+          <Checkbox 
+            id="remember" 
+            name="remember"
+            checked={formData.remember}
+            onChange={handleInputChange}
+            className="h-4 w-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500" 
+          /> 
           <span>Remember Me</span>
         </div>
 
         {/* Button */}
-        <Button onClick={()=>onSubmit} className="w-full bg-blue-700 hover:bg-blue-800 py-5 text-white text-sm cursor-pointer">
-          Sign In to Dashboard →
+        <Button 
+          type="submit"
+          disabled={loading}
+          className="w-full bg-blue-700 hover:bg-blue-800 py-5 text-white text-sm cursor-pointer"
+        >
+          {loading ? 'Signing in...' : 'Sign In to Dashboard →'}
         </Button>
       </form>
 
